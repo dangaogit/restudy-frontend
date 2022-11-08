@@ -1,0 +1,7 @@
+{
+  "name": "vue3-template-ts",
+  "version": "1.0.0",
+  "description": "A chat-client of implatemented by vue3.x",
+  "author": "dango",
+  "license": "MIT"
+}
