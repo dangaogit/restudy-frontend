@@ -17,5 +17,6 @@ rules: {
   # 尾随逗号：数组；对象
   "@typescript-eslint/comma-dangle": ["error", { "arrays": "always", "objects": "always" }],
   "@typescript-eslint/space-before-function-paren": ["error", "never"],
-  "@typescript-eslint/member-delimiter-style": ["error", "semi"]
+  "@typescript-eslint/member-delimiter-style": ["error", "semi"],
+  "max-len": ["error", 120],
 }

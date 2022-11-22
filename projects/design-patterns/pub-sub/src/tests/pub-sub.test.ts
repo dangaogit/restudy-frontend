@@ -31,8 +31,6 @@ class PublisherStub implements Publisher {
 describe('注册发布者接口', () => {
     const pubSubService = new PubSubService();
     test('注册一个发布者', () => {
-        expect(
-            pubSubService.register(new PublisherStub(PublisherStub.NORMAL_ID))
-        ).toBe(void 0);
+        expect(pubSubService.register(new PublisherStub(PublisherStub.NORMAL_ID))).toBe(void 0);
     });
 });
