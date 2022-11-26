@@ -1,3 +1,3 @@
 export interface Publisher {
-    getId(): string;
+    getId: () => string;
 }

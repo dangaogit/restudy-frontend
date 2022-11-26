@@ -15,7 +15,7 @@ rules: {
   # 换行符：\r
   "eol-last": ["error", "always"],
   # 尾随逗号：数组；对象
-  "@typescript-eslint/comma-dangle": ["error", { "arrays": "only-multiline", "objects": "only-multiline" }],
+  "@typescript-eslint/comma-dangle": ["error", { "arrays": "only-multiline", "objects": "only-multiline", "enums": "only-multiline" }],
   "@typescript-eslint/space-before-function-paren": ["error", { "anonymous": "always", "named": "never", "asyncArrow": "always" }],
   "@typescript-eslint/semi": ["error", "always"],
   "@typescript-eslint/member-delimiter-style": ["error", { "multiline": { "delimiter": "semi", "requireLast": true } }],
