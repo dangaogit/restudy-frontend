@@ -1,6 +1,6 @@
-import { PubSubError, PubSubErrorCode } from '../main/error';
-import { PubSubService } from '../main/pub-sub.service';
-import { Publisher } from '../main/publisher';
+import { PubSubError, PubSubErrorCode } from '../main/pub-sub/error';
+import { PubSubService } from '../main/pub-sub/pub-sub.service';
+import { Publisher } from '../main/pub-sub/publisher';
 
 describe('接口定义', () => {
     const pubSubService = new PubSubService();
@@ -20,14 +20,17 @@ describe('接口定义', () => {
 
 class PublisherStub implements Publisher {
     public static NORMAL_ID = 'normal-id';
+
     public static NOT_FOUND_ID = 'not-found-id';
 
     public static normalPublisher = new PublisherStub(this.NORMAL_ID);
 
     private id: string;
+
     public constructor(id: string) {
         this.id = id;
     }
+
     public getId(): string {
         return this.id;
     }
@@ -64,12 +67,10 @@ describe('注册/订阅/发布流程', () => {
         const promise = new Promise<boolean>((resolve, reject) => {
             pubSubService.subscribe({
                 id: PublisherStub.NORMAL_ID,
-                callback: (data) => {
-                    resolve(data === messageData);
-                },
+                callback: (data) => resolve(data === messageData),
             });
             // 一秒不出结果则失败
-            // setTimeout(() => resolve(false), 1000 * 1);
+//             setTimeout(() => resolve(false), 1000 * 1);
         });
         pubSubService.publish({
             id: PublisherStub.NORMAL_ID,
