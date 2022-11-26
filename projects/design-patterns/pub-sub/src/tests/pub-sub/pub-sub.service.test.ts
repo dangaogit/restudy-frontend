@@ -1,6 +1,6 @@
-import { PubSubError, PubSubErrorCode } from '../main/pub-sub/error';
-import { PubSubService } from '../main/pub-sub/pub-sub.service';
-import { Publisher } from '../main/pub-sub/publisher';
+import { PubSubError, PubSubErrorCode } from '../../main/pub-sub/error';
+import { PubSubService } from '../../main/pub-sub/pub-sub.service';
+import { Publisher } from '../../main/pub-sub/publisher';
 
 describe('接口定义', () => {
     const pubSubService = new PubSubService();
@@ -25,7 +25,7 @@ class PublisherStub implements Publisher {
 
     public static normalPublisher = new PublisherStub(this.NORMAL_ID);
 
-    private id: string;
+    private readonly id: string;
 
     public constructor(id: string) {
         this.id = id;
@@ -40,7 +40,7 @@ describe('注册/订阅/发布流程', () => {
     const pubSubService = new PubSubService();
     pubSubService.register(PublisherStub.normalPublisher);
     test('订阅一个已注册的发布者', () => {
-        expect(pubSubService.subscribe({ id: PublisherStub.NORMAL_ID, callback: () => {} })).toBe(void 0);
+        expect(pubSubService.subscribe({ id: PublisherStub.NORMAL_ID, callback: () => {} })).toBe(undefined);
     });
     test('订阅一个未注册的发布者', () => {
         try {
@@ -56,11 +56,11 @@ describe('注册/订阅/发布流程', () => {
     });
     test('已注册发布者发布', async () => {
         expect(
-            await pubSubService.publish({
+            pubSubService.publish({
                 id: PublisherStub.NORMAL_ID,
                 data: undefined,
             })
-        ).toBe(void 0);
+        ).toBe(undefined);
     });
     test('接收发布者消息', async () => {
         const messageData = 'messageData';
@@ -70,7 +70,7 @@ describe('注册/订阅/发布流程', () => {
                 callback: (data) => resolve(data === messageData),
             });
             // 一秒不出结果则失败
-//             setTimeout(() => resolve(false), 1000 * 1);
+            //             setTimeout(() => resolve(false), 1000 * 1);
         });
         pubSubService.publish({
             id: PublisherStub.NORMAL_ID,

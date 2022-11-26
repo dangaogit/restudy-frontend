@@ -4,14 +4,14 @@ import { Publisher } from './publisher';
 import { Subscriber } from './subscriber';
 
 export class PubSubService {
-    private publishers = new Set<Publisher>();
-    private subscribers = new Set<Subscriber>();
+    private readonly publishers = new Set<Publisher>();
+    private readonly subscribers = new Set<Subscriber>();
 
     public register(publisher: Publisher): void {
         this.publishers.add(publisher);
     }
 
-    public async publish<T>(message: Message<T>): Promise<void> {
+    public publish<T>(message: Message<T>): void {
         this.ensurePublisherExist(message.id);
         const subscribers = this.querySubscribers(message.id);
         subscribers.forEach((s) => s.callback(message.data));
