@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "build": "ts-node --project tsconfig.build.json src/scripts/example.build.ts",
     "test": "jest",
     "test:assert": ""
   },
